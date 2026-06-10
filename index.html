@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sawyer — Personal Site</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:    #D4537E;
+      --pink-lt: #FBEAF0;
+      --pink-md: #ED93B1;
+      --purple:  #534AB7;
+      --purple-lt: #EEEDFE;
+      --purple-md: #AFA9EC;
+      --text:    #1a1a1a;
+      --muted:   #6b6b6b;
+      --border:  #e8e4f0;
+      --bg:      #ffffff;
+      --bg-soft: #faf8fc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    nav ul {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      height: 56px;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    nav a:hover { color: var(--purple); }
+    nav .name {
+      margin-right: auto;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    /* LAYOUT */
+    main { max-width: 720px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+    section { padding: 5rem 0 0; }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    h2 {
+      font-size: 1.1rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 2rem;
+    }
+    p { color: #333; margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* HERO */
+    #about { padding-top: 5rem; }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--purple);
+      background: var(--purple-lt);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    .accent { color: var(--pink); }
+
+    /* PROJECTS */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 560px) { .project-grid { grid-template-columns: 1fr; } }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-soft);
+      transition: border-color 0.15s;
+    }
+    .project-card:hover { border-color: var(--purple-md); }
+    .project-card h3 {
+      font-size: 1rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+    .project-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-family: 'Helvetica Neue', sans-serif;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 0.75rem;
+      margin-right: 4px;
+      background: var(--pink-lt);
+      color: var(--pink);
+    }
+    .tag.purple { background: var(--purple-lt); color: var(--purple); }
+
+    /* BLOG */
+    .post-list { list-style: none; }
+    .post-list li {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .post-list li:last-child { border-bottom: 1px solid var(--border); }
+    .post-list a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 16px;
+      transition: color 0.15s;
+    }
+    .post-list a:hover { color: var(--purple); }
+    .post-date {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* MATH */
+    .math-note {
+      background: var(--purple-lt);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .math-note h3 {
+      font-size: 15px;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 0.4rem;
+    }
+    .math-note p {
+      font-size: 14px;
+      color: #444;
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+    }
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      background: #f0eeff;
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--purple);
+    }
+
+    /* CONTACT */
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .contact-link:hover { border-color: var(--pink-md); color: var(--pink); }
+
+    /* FOOTER */
+    footer {
+      max-width: 720px;
+      margin: 5rem auto 0;
+      padding: 2rem 2rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#about" class="name">Sawyer</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#math">Math</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <span class="hero-tag">hello there</span>
+    <h1>I'm Sawyer.<br>I build things and <span class="accent">think about math.</span></h1>
+    <p>
+      I'm a researcher and developer with interests in quantum computing, topology, and the mathematics that ties them together. I write about things I'm learning and share projects I'm working on.
+    </p>
+    <p>
+      Currently based in Isla Vista, CA. Always up for interesting conversations.
+    </p>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Project one</h3>
+        <p>A short description of what this project does and why it's interesting.</p>
+        <span class="tag">Python</span>
+        <span class="tag purple">Quantum</span>
+      </div>
+      <div class="project-card">
+        <h3>Project two</h3>
+        <p>A short description of what this project does and why it's interesting.</p>
+        <span class="tag">JavaScript</span>
+      </div>
+      <div class="project-card">
+        <h3>Project three</h3>
+        <p>A short description of what this project does and why it's interesting.</p>
+        <span class="tag purple">Math</span>
+      </div>
+      <div class="project-card">
+        <h3>Project four</h3>
+        <p>A short description of what this project does and why it's interesting.</p>
+        <span class="tag">Research</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <h2>Writing</h2>
+    <ul class="post-list">
+      <li>
+        <a href="#">A post about something interesting</a>
+        <span class="post-date">Jun 2026</span>
+      </li>
+      <li>
+        <a href="#">Another post you wrote</a>
+        <span class="post-date">May 2026</span>
+      </li>
+      <li>
+        <a href="#">Thoughts on a topic you care about</a>
+        <span class="post-date">Apr 2026</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- MATH -->
+  <section id="math">
+    <h2>Math</h2>
+    <p>Things I find beautiful or worth thinking about.</p>
+
+    <div class="math-note">
+      <h3>Topological quantum computation</h3>
+      <p>Anyons in 2D systems braid in ways that encode fault-tolerant qubits — the computation lives in topology, not in fragile local states. The key invariant is the <code>Jones polynomial</code>.</p>
+    </div>
+
+    <div class="math-note">
+      <h3>Stabilizer formalism</h3>
+      <p>The Heisenberg representation lets you track <code>n</code>-qubit stabilizer states efficiently — exponential compression from tracking Pauli group generators instead of amplitudes.</p>
+    </div>
+
+    <div class="math-note">
+      <h3>Something else you love</h3>
+      <p>Add a short note about any theorem, idea, or open question you keep coming back to.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>The best way to reach me is by email. I'm also on a few other platforms.</p>
+    <div class="contact-links">
+      <a href="mailto:you@yourdomain.com" class="contact-link">✉ Email</a>
+      <a href="https://github.com/" class="contact-link">GitHub</a>
+      <a href="https://twitter.com/" class="contact-link">Twitter / X</a>
+      <a href="https://linkedin.com/" class="contact-link">LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Sawyer. Built by hand.
+</footer>
+
+</body>
+</html>
