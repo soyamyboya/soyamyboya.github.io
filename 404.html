@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:      #D4537E;
+      --pink-lt:   #FBEAF0;
+      --pink-md:   #ED93B1;
+      --purple:    #534AB7;
+      --purple-lt: #EEEDFE;
+      --purple-md: #AFA9EC;
+      --text:      #1a1a1a;
+      --muted:     #6b6b6b;
+      --border:    #e8e4f0;
+      --bg:        #ffffff;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .floating {
+      position: fixed;
+      font-size: 1.4rem;
+      opacity: 0.07;
+      animation: drift linear infinite;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes drift {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.07; }
+      90%  { opacity: 0.07; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--pink);
+      background: var(--pink-lt);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1.75rem;
+    }
+
+    .big {
+      font-size: clamp(5rem, 18vw, 9rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--purple);
+      margin-bottom: 0.25rem;
+    }
+
+    .equals {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .equals span {
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      max-width: 480px;
+    }
+
+    .proof {
+      background: var(--purple-lt);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 8px 8px 0;
+      padding: 1.1rem 1.5rem;
+      margin: 2rem auto;
+      max-width: 440px;
+      text-align: left;
+    }
+
+    .proof p {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 13.5px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 0.3rem;
+    }
+
+    .proof p:last-child { margin-bottom: 0; }
+
+    .proof .label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 12.5px;
+      background: #e8e4ff;
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--purple);
+    }
+
+    .qed {
+      display: inline-block;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .home-link {
+      display: inline-block;
+      margin-top: 2.5rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 9px 22px;
+      border-radius: 6px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .home-link:hover { border-color: var(--pink-md); color: var(--pink); }
+
+    .footnote {
+      margin-top: 3rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 380px;
+      line-height: 1.6;
+    }
+
+    .footnote sup { font-size: 10px; color: var(--pink); }
+  </style>
+</head>
+<body>
+
+  <script>
+    const symbols = ['∮','∇','∂','∑','∏','∫','√','∞','∈','∉','⊂','⊄','∀','∃','∄','≠','≡','≈','⊕','⊗','λ','φ','ψ','Ω','π','θ','α','β','γ','δ'];
+    for (let i = 0; i < 22; i++) {
+      const el = document.createElement('span');
+      el.className = 'floating';
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (12 + Math.random() * 20) + 's';
+      el.style.animationDelay = (Math.random() * 15) + 's';
+      el.style.fontSize = (1 + Math.random() * 1.8) + 'rem';
+      document.body.appendChild(el);
+    }
+  </script>
+
+  <span class="tag">Error</span>
+
+  <div class="big">404</div>
+  <div class="equals">i.e. <span>∄</span> page at this URL</div>
+
+  <h1>This page does not exist.<br>We have a proof.</h1>
+
+  <div class="proof">
+    <span class="label">Theorem 404</span>
+    <p><strong>Claim:</strong> The page you requested is the empty set.</p>
+    <p><strong>Proof:</strong> Suppose, for contradiction, that the page exists. Then it would be reachable at <code>this URL</code>. But our server has exhaustively checked all elements of the internet and found no such page. By the axiom of extensionality, a set with no elements is empty. ∎</p>
+    <p><strong>Corollary:</strong> You may have made a typo, or someone deleted this page. Both are non-constructive.</p>
+    <span class="qed">— Q.E.D. (quite embarrassingly dead link)</span>
+  </div>
+
+  <a href="/" class="home-link">← back to the homepage</a>
+
+  <p class="footnote">
+    <sup>1</sup> No mathematicians were harmed in the making of this error page. The proof above is valid in ZFC set theory and also in the weaker system of "you probably just mistyped the URL."
+  </p>
+
+</body>
+</html>
